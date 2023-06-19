@@ -4,3 +4,6 @@
 # IntelliJ project files
 .idea/
 *.iml
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
