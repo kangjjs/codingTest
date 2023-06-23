@@ -6,8 +6,8 @@ class Ch01 {
     public int solution(String s){
         HashMap<Character,Integer> answer =new HashMap<>();
 
-        for(char x:s.toCharArray()){
-            answer.put(x,answer.getOrDefault(x,0)+1);
+        for(char c:s.toCharArray()){
+            answer.put(c,answer.getOrDefault(c,0)+1);
         }
 
         for(int i=0;i<s.length();i++){
