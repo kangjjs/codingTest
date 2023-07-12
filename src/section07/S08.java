@@ -6,32 +6,37 @@ import java.util.Scanner;
 
 public class S08 {
 
-    int [] check = new int[10001];
+    int [] check =new int[10001];
 
     public int solution(int n,int m){
-        int [] dx = {1,5,-1};
+        Queue<Integer> queue = new LinkedList<>();
 
-        Queue<Integer> queue =new LinkedList<>();
+        int [] dx= {1,-1,5};
 
         queue.offer(n);
         check[n]=1;
-        int L=0;
+        int answer=0;
 
         while(!queue.isEmpty()){
-            int len=queue.size();
+            int len = queue.size();
+
             for(int i=0;i<len;i++){
                 int x=queue.poll();
-                for(int j=0;j<3;j++) {
-                    int nx = x + dx[j];
-                    if (nx==m)
-                        return L+1;
-                    if (nx>=1 && nx<=10000 && check[nx]==0){
+                for(int j=0;j<3;j++){
+                    int nx=x+dx[j];
+
+                    if(nx==m){
+                        return answer+1;
+                    }
+
+                    if(nx>=1&&nx<=10000&&check[nx]==0){
                         check[nx]=1;
                         queue.offer(nx);
                     }
                 }
             }
-            L++;
+
+            answer++;
         }
 
         return 0;
