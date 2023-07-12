@@ -47,4 +47,3 @@ public class S07 {
         tree.solution(tree.root);
     }
 }
-
