@@ -1,40 +1,37 @@
 package section08;
 
-import java.util.Scanner;
+    import java.util.Scanner;
 
-public class S02 {
+    public class S02 {
+        static int n, m,answer=Integer.MIN_VALUE;
+        static int [] arr;
 
-    static int n,m,sum=0;
-    static int [] check;
-    static int [] arr;
-
-    public void solution(int k,int s){
-        if(s>m)
-            return;
-        if(k==n){
-            sum=Math.max(sum,s);
-            return;
+        public void solution(int l,int sum){
+            if(sum>m)
+                return;
+            if(l==n){
+                answer=Math.max(answer,sum);
+                return;
+            }else{
+                solution(l+1,sum+arr[l]);
+                solution(l+1,sum);
+            }
         }
-        else{
-            sum=Math.max(sum,s);
-            solution(k+1,s+arr[k]);
-            solution(k+1,s);
+
+        public static void main(String[] args) {
+            S02 T = new S02();
+            Scanner kb = new Scanner(System.in);
+
+            m = kb.nextInt();
+            n = kb.nextInt();
+
+            arr = new int[n];
+
+            for(int i=0;i<n;i++){
+                arr[i]=kb.nextInt();
+            }
+
+            T.solution(0,0);
+            System.out.print(answer);
         }
     }
-
-    public static void main(String[] args){
-        S02 T = new S02();
-        Scanner kb = new Scanner(System.in);
-        m=kb.nextInt();
-        n=kb.nextInt();
-        check = new int [n+1];
-        arr=new int[n];
-
-        for(int i=0;i<n;i++){
-            arr[i]=kb.nextInt();
-        }
-
-        T.solution(0,0);
-        System.out.print(sum);
-    }
-}
