@@ -4,31 +4,22 @@ import java.util.Scanner;
 
 public class S07 {
 
-    static int n,m,answer=0;
-
-    public void solution(int k,int l){
-        if(l==1) {
-            answer += k;
-            return;
-        }
-        if(k==l) {
-            answer += 1;
-            return;
-        }
-        else{
-            solution(k-1,l-1);
-            solution(k-1,l);
-        }
+    public int solution(int c, int r) {
+        if (c == r)
+            return 1;
+        else if (r == 1)
+            return c;
+        else
+            return solution(c - 1, r - 1) + solution(c - 1, r);
     }
 
     public static void main(String[] args) {
         S07 T = new S07();
         Scanner kb = new Scanner(System.in);
 
-        n = kb.nextInt();
-        m = kb.nextInt();
+        int c = kb.nextInt();
+        int r = kb.nextInt();
 
-        T.solution(n,m);
-        System.out.print(answer);
+        System.out.print(T.solution(c,r));
     }
 }
