@@ -4,21 +4,21 @@ import java.util.Scanner;
 
 public class S06 {
 
-    static int n, m;
-    static int[] arr1, check, arr2;
+    static int n,m;
+    static int [] arr,a,ch;
 
-    public void solution(int k) {
-        if (k == m) {
-            for (int x : arr2)
-                System.out.print(x + " ");
+    public void solution(int l){
+        if(l==m){
+            for(int x:a)
+                System.out.print(x+" ");
             System.out.println();
-        } else {
-            for (int i = 0; i < n; i++) {
-                if(check[i]==0){
-                    check[i]=1;
-                    arr2[k]=arr1[i];
-                    solution(k+1);
-                    check[i]=0;
+        }else{
+            for(int i=0;i<n;i++){
+                if(ch[i]==0) {
+                    ch[i]=1;
+                    a[l] = arr[i];
+                    solution(l + 1);
+                    ch[i]=0;
                 }
             }
         }
@@ -31,14 +31,13 @@ public class S06 {
         n = kb.nextInt();
         m = kb.nextInt();
 
-        arr1 = new int[n];
+        arr=new int[n];
+        a=new int[m];
+        ch=new int[n];
 
-        for (int i = 0; i < n; i++) {
-            arr1[i] = kb.nextInt();
+        for(int i=0;i<n;i++){
+            arr[i]=kb.nextInt();
         }
-
-        check = new int[n];
-        arr2 = new int[m];
 
         T.solution(0);
     }
