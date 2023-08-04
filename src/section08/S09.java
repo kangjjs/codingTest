@@ -5,17 +5,17 @@ import java.util.Scanner;
 public class S09 {
 
     static int n,m;
-    static int [] arr;
+    static int [] arr,ch;
 
-    public void solution(int k,int s){
-        if(k==m){
+    public void solution(int l,int k){
+        if(l==m){
             for(int x:arr)
                 System.out.print(x+" ");
             System.out.println();
         }else{
-            for(int i=s;i<=n;i++){
-                arr[k]=i;
-                solution(k+1,i+1);
+            for(int i=k;i<=n;i++){
+                arr[l]=i;
+                solution(l+1,i+1);
             }
         }
     }
@@ -26,8 +26,8 @@ public class S09 {
 
         n = kb.nextInt();
         m = kb.nextInt();
-
-        arr= new int[m];
+        ch=new int[n+1];
+        arr=new int[m];
         T.solution(0,1);
     }
 }
