@@ -4,35 +4,39 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-class Meeting implements Comparable<Meeting> {
-    int st,et;
+class Meeting implements Comparable<Meeting>{
+    public int st;
+    public int et;
 
-    public Meeting(int st, int et){
+    public Meeting(int st,int et){
         this.st=st;
         this.et=et;
     }
 
     @Override
     public int compareTo(Meeting o) {
-        if(this.et==o.et) return this.st-o.st;
-        else return this.et-o.et;
+        if(this.et==o.et)
+            return this.st-o.st;
+        else
+            return this.et-o.et;
     }
 }
 public class S02 {
+
     public int solution(ArrayList<Meeting> meetings){
         Collections.sort(meetings);
-        int count=0;
+
         int et=0;
+        int answer=0;
 
         for(Meeting m:meetings){
-            System.out.println(m.st+" "+m.et);
             if(m.st>=et){
                 et=m.et;
-                count++;
+                answer++;
             }
         }
 
-        return count;
+        return answer;
     }
 
     public static void main(String[] args) {
@@ -40,15 +44,14 @@ public class S02 {
         Scanner kb = new Scanner(System.in);
 
         int n=kb.nextInt();
-        int st,et;
-        ArrayList<Meeting> m =new ArrayList<>();
+        ArrayList<Meeting> meetings = new ArrayList<>();
 
         for(int i=0;i<n;i++){
-            st=kb.nextInt();
-            et=kb.nextInt();
-            m.add(new Meeting(st,et));
+            int st=kb.nextInt();
+            int et=kb.nextInt();
+            meetings.add(new Meeting(st,et));
         }
 
-        System.out.print(T.solution(m));
+        System.out.print(T.solution(meetings));
     }
 }
