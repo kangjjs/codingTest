@@ -1,39 +1,39 @@
 package section09;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-class Athlete implements Comparable<Athlete>{
+
+class Body implements Comparable<Body>{
+
     public int h;
     public int w;
 
-    public Athlete(int h, int w){
-        this.w=w;
+    public Body(int h,int w){
         this.h=h;
+        this.w=w;
     }
 
     @Override
-    public int compareTo(Athlete o) {
+    public int compareTo(Body o) {
         return o.h-this.h;
     }
 }
-
 public class S01 {
 
-    public int solution(ArrayList<Athlete> arrays){
-        int answer=0;
-        Collections.sort(arrays);
-        int max=Integer.MIN_VALUE;
+    public int solution(ArrayList<Body> bodies){
+        Collections.sort(bodies);
 
-        for(Athlete a:arrays){
-            if(a.w>max){
-                max=a.w;
+        int max=Integer.MIN_VALUE;
+        int answer=0;
+
+        for(Body b : bodies){
+            if(b.w>max){
+                max=b.w;
                 answer++;
             }
         }
-
 
         return answer;
     }
@@ -42,17 +42,15 @@ public class S01 {
         S01 T = new S01();
         Scanner kb = new Scanner(System.in);
 
-        int n = kb.nextInt();
-        int h,w;
-        ArrayList<Athlete> athletes = new ArrayList<>();
+        int n=kb.nextInt();
+        ArrayList<Body> bodies = new ArrayList<>();
 
         for(int i=0;i<n;i++){
-            h=kb.nextInt();
-            w=kb.nextInt();
-            athletes.add(new Athlete(h,w));
+            int h=kb.nextInt();
+            int w=kb.nextInt();
+            bodies.add(new Body(h,w));
         }
 
-
-        System.out.print(T.solution(athletes));
+        System.out.print(T.solution(bodies));
     }
 }

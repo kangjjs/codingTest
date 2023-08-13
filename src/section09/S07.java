@@ -22,7 +22,7 @@ class Edges implements Comparable<Edges>{
         return this.cost-o.cost;
     }
 }
-public class Main {
+public class S07 {
 
 
     static int[] unf;
