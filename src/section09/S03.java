@@ -4,34 +4,32 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-class Friend implements Comparable<Friend>{
+class Time implements Comparable<Time>{
     public int t;
     public char s;
 
-    public Friend(int t,char s){
+    public Time(int t,char s){
         this.t=t;
         this.s=s;
     }
 
 
     @Override
-    public int compareTo(Friend o) {
-            if(this.t==o.t)
-                return this.s-o.s;
-            else
-                return this.t-o.t;
+    public int compareTo(Time o) {
+        if(this.t==o.t)
+            return this.s-o.s;
+        else
+            return this.t-o.t;
     }
 }
-
 public class S03 {
 
-    public int solution(ArrayList<Friend> friends){
-        Collections.sort(friends);
+    public int solution(ArrayList<Time> times){
+        Collections.sort(times);
+        int answer=Integer.MIN_VALUE;
         int count=0;
-        int answer= Integer.MIN_VALUE;
-
-        for(Friend f:friends){
-            if(f.s=='s')
+        for(Time t:times){
+            if(t.s=='s')
                 count++;
             else
                 count--;
@@ -46,15 +44,15 @@ public class S03 {
         Scanner kb = new Scanner(System.in);
 
         int n=kb.nextInt();
-        ArrayList<Friend> friends = new ArrayList<>();
+        ArrayList<Time> times = new ArrayList<>();
 
         for(int i=0;i<n;i++){
             int at=kb.nextInt();
             int lt=kb.nextInt();
-            friends.add(new Friend(at,'s'));
-            friends.add(new Friend(lt,'e'));
+            times.add(new Time(at,'s'));
+            times.add(new Time(lt,'l'));
         }
 
-        System.out.println(T.solution(friends));
+        System.out.print(T.solution(times));
     }
 }
