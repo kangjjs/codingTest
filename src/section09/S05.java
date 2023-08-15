@@ -14,7 +14,6 @@ class Edge implements Comparable<Edge> {
         this.c = c;
     }
 
-
     @Override
     public int compareTo(Edge o) {
         return this.c - o.c;
@@ -33,18 +32,17 @@ public class S05 {
         dis[x] = 0;
 
         while (!priorityQueue.isEmpty()) {
-            Edge tmp = priorityQueue.poll();
-            System.out.println(tmp.v+" "+tmp.c);
-            int v = tmp.v;
-            int c = tmp.c;
+            Edge e = priorityQueue.poll();
+            int c = e.c;
+            int v = e.v;
 
-            if(c>dis[v])
+            if (c > dis[v])
                 continue;
 
-            for(Edge ob : graph.get(v)){
-                if(dis[ob.v]>c+ob.c){
-                    dis[ob.v]=c+ob.c;
-                    priorityQueue.offer(new Edge(ob.v,c+ob.c));
+            for (Edge edge : graph.get(v)) {
+                if (dis[edge.v] > c + edge.c) {
+                    dis[edge.v] = c + edge.c;
+                    priorityQueue.offer(new Edge(edge.v,c+edge.c));
                 }
             }
         }
@@ -53,24 +51,25 @@ public class S05 {
     public static void main(String[] args) {
         S05 T = new S05();
         Scanner kb = new Scanner(System.in);
-
         n = kb.nextInt();
         m = kb.nextInt();
 
         graph = new ArrayList<ArrayList<Edge>>();
 
-        for (int i = 0; i <= n; i++) {
+        for(int i=0;i<=n;i++){
             graph.add(new ArrayList<Edge>());
         }
 
         dis = new int[n + 1];
-        Arrays.fill(dis,Integer.MAX_VALUE);
+        Arrays.fill(dis, Integer.MAX_VALUE);
+
+
         for (int i = 0; i < m; i++) {
-            int x = kb.nextInt();
-            int y = kb.nextInt();
+            int a = kb.nextInt();
+            int b = kb.nextInt();
             int c = kb.nextInt();
 
-            graph.get(x).add(new Edge(y, c));
+            graph.get(a).add(new Edge(b, c));
         }
 
         T.solution(1);
