@@ -1,26 +1,32 @@
 package ch01;
 
 import java.util.*;
+
 class Ch02 {
-    public int[] solution(int[][] board, int k){
+
+    int[] dx = {-1, 0, 1, 0};
+    int[] dy = {0, 1, 0, -1};
+
+    public int[] solution(int[][] board, int k) {
         int[] answer = new int[2];
+        int count = 0;
 
-        int [] dx = {0,1,0,-1};
-        int [] dy= {1,0,-1,0};
+        int i = 1, x = 0, y = 0;
 
-        int count=0;
-        int d=0,x=0,y=0;
-        while(count<k){
+        while (count < k) {
             count++;
-            int px=x+dx[d];
-            int py=y+dy[d];
 
-            if(px<0||px>=board.length||py<0||py>= board.length||board[px][py]==1){
-                d=(d+1)%4;
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+
+
+            if(nx>=board.length||nx<0||ny>=board.length||ny<0||board[nx][ny]==1){
+                i=(i+1)%4;
                 continue;
             }
-            x=px;
-            y=py;
+
+            x=nx;
+            y=ny;
         }
 
         answer[0]=x;
@@ -29,7 +35,7 @@ class Ch02 {
         return answer;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Ch02 T = new Ch02();
         int[][] arr1 = {{0, 0, 0, 0, 0},
                 {0, 1, 1, 0, 0},
