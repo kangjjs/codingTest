@@ -1,62 +1,72 @@
 package ch01;
 
-import java.util.*;
-
 class Ch03 {
     public int solution(int[][] board) {
         int answer = 0;
+        int n=board.length;
 
-        int dogX = 0, dogY = 0, hX = 0, hY = 0;
-        int dogD = 0, hD = 0;
+        int[] px = {-1, 0, 1, 0};
+        int[] py = {0, 1, 0, -1};
+
         int[] dx = {-1, 0, 1, 0};
         int[] dy = {0, 1, 0, -1};
-        int n = board.length;
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (board[i][j] == 2) {
-                    hX = i;
-                    hY = j;
+        int dogX=0,dogY=0,peX=0,peY=0,dp=0,dd=0;
+
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(board[i][j]==2){
+                    peX=i;
+                    peY=j;
                 }
-                if (board[i][j] == 3) {
-                    dogX = i;
-                    dogY = j;
+
+                if(board[i][j]==3){
+                    dogX=i;
+                    dogY=j;
                 }
             }
         }
 
-        while (answer<10000) {
+        while(answer<10000){
             answer++;
 
-            int x = dogX + dx[dogD];
-            int y = dogY + dy[dogD];
+            boolean bp=true,bd=true;
 
-            int px = hX + dx[hD];
-            int py = hY + dy[hD];
+            int npeX=peX+px[dp];
+            int npeY=peY+py[dp];
 
-            if (x < 0 || x >= n || y < 0 || y >= n || board[x][y] == 1) {
-                dogD = (dogD + 1) % 4;
-            } else {
-                dogX = x;
-                dogY = y;
+            int ndX=dogX+dx[dd];
+            int ndY=dogY+dy[dd];
+
+            if(npeX>=n||npeX<0||npeY>=n||npeY<0||board[npeX][npeY]==1){
+                dp=(dp+1)%4;
+                bp=false;
             }
 
-            if (px < 0 || px >= n || py < 0 || py >= n || board[px][py] == 1) {
-                hD = (hD + 1) % 4;
-            } else {
-                hX = px;
-                hY = py;
+            if(ndX>=n||ndX<0||ndY>=n||ndY<0||board[ndX][ndY]==1){
+                dd=(dd+1)%4;
+                bd=false;
             }
 
-            if(dogX==hX&&dogY==hY)
+            if(bp){
+                peX=npeX;
+                peY=npeY;
+            }
+
+            if(bd){
+                dogX=ndX;
+                dogY=ndY;
+            }
+
+            if(peX==dogX&&peY==dogY)
                 break;
         }
 
-        if (answer >= 10000) {
+        if(answer>=10000){
             return 0;
+        }else{
+            return answer;
         }
-
-        return answer;
     }
 
     public static void main(String[] args) {
