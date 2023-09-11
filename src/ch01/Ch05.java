@@ -1,40 +1,46 @@
 package ch01;
 
-import java.util.*;
-public class Ch05 {
-    public int solution(int[] nums){
+import java.util.ArrayList;
+
+class Ch05 {
+    public int solution(int[] nums) {
         int answer = 0;
+        int n = nums.length;
+        ArrayList<Integer> peak = new ArrayList<>();
 
-        ArrayList<Integer> peaks =new ArrayList<>();
-        int n=nums.length;
-
-        for(int i=1;i<n-1;i++){
-            if(nums[i-1]<nums[i]&&nums[i]>nums[i+1])
-                peaks.add(i);
+        for (int i = 1; i < n - 1; i++) {
+            if (nums[i - 1] < nums[i] && nums[i] > nums[i + 1])
+                peak.add(i);
         }
 
-        for(int x:peaks){
-            int count=1;
-            int left=x;
-            int right=x;
+        for (int t : peak) {
+            int count = 1;
+            int lt = t;
+            int rt = t;
 
-            while(left-1>=0&&nums[left]>nums[left-1]){
-                left--;
-                count++;
+            while (lt > 0) {
+                if (nums[lt] > nums[lt - 1]) {
+                    lt--;
+                    count++;
+                } else
+                    break;
             }
 
-            while(right+1<n&&nums[right]>nums[right+1]){
-                right++;
-                count++;
+            while (rt < n - 1) {
+                if (nums[rt] > nums[rt + 1]) {
+                    rt++;
+                    count++;
+                } else
+                    break;
             }
 
-            answer=Math.max(answer,count);
+            answer = Math.max(answer, count);
         }
 
         return answer;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Ch05 T = new Ch05();
         System.out.println(T.solution(new int[]{1, 2, 1, 2, 3, 2, 1}));
         System.out.println(T.solution(new int[]{1, 1, 2, 3, 5, 7, 4, 3, 1, 2}));
