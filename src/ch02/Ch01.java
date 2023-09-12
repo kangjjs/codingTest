@@ -4,14 +4,16 @@ import java.util.HashMap;
 
 class Ch01 {
     public int solution(String s){
-        HashMap<Character,Integer> answer =new HashMap<>();
+        int answer = 0;
 
-        for(char c:s.toCharArray()){
-            answer.put(c,answer.getOrDefault(c,0)+1);
+        HashMap<Character,Integer> hm =new HashMap<>();
+
+        for(char x:s.toCharArray()){
+            hm.put(x,hm.getOrDefault(x,0)+1);
         }
 
         for(int i=0;i<s.length();i++){
-            if(answer.get(s.charAt(i))==1)
+            if(hm.get(s.charAt(i))==1)
                 return i+1;
         }
 
