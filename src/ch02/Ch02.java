@@ -5,21 +5,19 @@ class Ch02 {
     public int[] solution(String s){
         int[] answer = new int[5];
 
-        HashMap<Character,Integer> hashMap =new HashMap<>();
+        int [] str =new int[5];
+        int max=0;
 
-        for(char c:s.toCharArray()){
-            hashMap.put(c,hashMap.getOrDefault(c,0)+1);
+        for(char x:s.toCharArray()){
+            str[x-97]++;
         }
 
-        int max=-1;
-        String tmp ="abcde";
-
-        for(char c: hashMap.keySet()){
-            max=Math.max(hashMap.get(c),max);
+        for(int x:str){
+            max=Math.max(x,max);
         }
 
-        for(int i=0;i<answer.length;i++){
-            answer[i]=max-hashMap.getOrDefault(tmp.charAt(i),0);
+        for(int i=0;i<5;i++){
+            answer[i]=max-str[i];
         }
 
         return answer;
