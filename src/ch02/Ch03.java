@@ -1,27 +1,28 @@
 package ch02;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+
 class Ch03 {
     public int solution(String s){
         int answer = 0;
 
         HashMap<Character,Integer> hm =new HashMap<>();
+        HashSet<Integer> ch =new HashSet<>();
 
         for(char x:s.toCharArray()){
             hm.put(x,hm.getOrDefault(x,0)+1);
         }
 
-        ArrayList<Integer> arrayList = new ArrayList<>();
-
-        for(char c:hm.keySet()){
-            while(arrayList.contains(hm.get(c))) {
+        for(char key: hm.keySet()){
+            while(ch.contains(hm.get(key))){
                 answer++;
-                hm.put(c,hm.get(c)-1);
+                hm.put(key,hm.get(key)-1);
             }
 
-            if(hm.get(c)==0)
+            if(hm.get(key)==0)
                 continue;
-            arrayList.add(hm.get(c));
+            ch.add(hm.get(key));
         }
 
         return answer;
