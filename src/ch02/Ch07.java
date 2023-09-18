@@ -1,49 +1,48 @@
 package ch02;
 
-import java.time.Duration;
-import java.time.LocalTime;
 import java.util.*;
 
 class Ch07 {
-    public String[] solution(String[] reports, int time) {
 
-        HashMap<String, ArrayList<LocalTime>> hm = new HashMap<>();
-        ArrayList<String> overMember = new ArrayList<>();
+    public int getTime(String times){
+        int h = Integer.parseInt(times.split(":")[0]);
+        int m = Integer.parseInt(times.split(":")[1]);
 
-        for (String report : reports) {
-            String name = report.split(" ")[0];
-            LocalTime t = LocalTime.parse(report.split(" ")[1]);
-            hm.putIfAbsent(name, new ArrayList<>());
-            hm.get(name).add(t);
+        return 60*h+m;
+    }
+
+    public String[] solution(String[] reports, int time){
+        String[] answer;
+
+        HashMap<String,Integer> inTime = new HashMap<>();
+        HashMap<String,Integer> sumTime = new HashMap<>();
+
+        for(String x : reports){
+            String name = x.split(" ")[0];
+            int t = getTime(x.split(" ")[1]);
+            String state = x.split(" ")[2];
+
+            if(state.equals("in"))
+                inTime.put(name,t);
+            else
+                sumTime.put(name,sumTime.getOrDefault(name,0)+(t-inTime.get(name)));
         }
 
-        for (String name : hm.keySet()) {
-            ArrayList<LocalTime> localTimes = hm.get(name);
-            long minutes = 0;
+        ArrayList<String> arrayList = new ArrayList<>();
 
-            for (int i = 0; i < localTimes.size(); i += 2) {
-                LocalTime inTime = localTimes.get(i);
-                LocalTime outTime = localTimes.get(i + 1);
-                Duration duration = Duration.between(inTime, outTime);
-                minutes += duration.toMinutes();
-            }
-
-            if (minutes > time) {
-                overMember.add(name);
-            }
+        for(String x : sumTime.keySet()){
+            if(sumTime.get(x)>time)
+                arrayList.add(x);
         }
 
-        overMember.sort(String::compareTo);
-        String[] answer = new String[overMember.size()];
+        arrayList.sort(String::compareTo);
 
-        for (int i = 0; i < answer.length; i++) {
-            answer[i] = overMember.get(i);
-        }
+        answer=arrayList.toArray(new String[0]);
 
         return answer;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         Ch07 T = new Ch07();
         System.out.println(Arrays.toString(T.solution(new String[]{"john 09:30 in", "daniel 10:05 in", "john 10:15 out", "luis 11:57 in", "john 12:03 in", "john 12:20 out", "luis 12:35 out", "daniel 15:05 out"}, 60)));
         System.out.println(Arrays.toString(T.solution(new String[]{"bill 09:30 in", "daniel 10:00 in", "bill 11:15 out", "luis 11:57 in", "john 12:03 in", "john 12:20 out", "luis 14:35 out", "daniel 14:55 out"}, 120)));
