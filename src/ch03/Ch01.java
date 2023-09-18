@@ -1,24 +1,26 @@
 package ch03;
 
-import java.util.*;
+import java.util.HashSet;
+
 class Ch01 {
     public int solution(int[] nums){
-        int answer = 0;
-        HashSet<Integer> hs =new HashSet<>();
+        int answer = Integer.MIN_VALUE;
+
+        HashSet<Integer> hs = new HashSet<>();
 
         for(int x:nums){
             hs.add(x);
         }
 
-        for(int x:hs){
-            int count=0;
+        for(int x: hs){
             if(hs.contains(x-1))
                 continue;
+            int cnt=0;
             while(hs.contains(x)){
-                count++;
+                cnt++;
                 x++;
             }
-            answer= Math.max(answer,count);
+            answer=Math.max(cnt,answer);
         }
 
         return answer;
