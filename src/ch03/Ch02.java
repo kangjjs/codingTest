@@ -1,49 +1,38 @@
 package ch03;
 
-import java.util.*;
+import java.util.Stack;
 
 class Ch02 {
     public String solution(String s) {
         StringBuilder answer = new StringBuilder();
         Stack<String> st = new Stack<>();
-
         for (Character x : s.toCharArray()) {
             if (x == ')') {
                 String tmp = "";
                 while (!st.empty()) {
                     String c = st.pop();
-
                     if (c.equals("(")) {
                         StringBuilder num = new StringBuilder();
-                        StringBuilder res= new StringBuilder();
                         while (!st.empty() && Character.isDigit(st.peek().charAt(0))) {
-                            num.insert(0, st.pop());
+                            num.append(st.pop());
                         }
-
-                        int count;
-
+                        StringBuilder res = new StringBuilder();
+                        int cnt = 0;
                         if (num.toString().equals(""))
-                            count = 1;
+                            cnt = 1;
                         else
-                            count=Integer.parseInt(num.toString());
-
-                        for(int i=0;i<count;i++){
+                            cnt = Integer.parseInt(num.toString());
+                        for (int i = 0; i < cnt; i++)
                             res.append(tmp);
-                        }
-
                         st.push(res.toString());
                         break;
                     }
-                    tmp=c+tmp;
+                    tmp = c + tmp;
                 }
-            } else
-                st.push(String.valueOf(x));
+            } else st.push(String.valueOf(x));
         }
-
-        for(String x:st){
+        for (String x : st)
             answer.append(x);
-        }
-
         return answer.toString();
     }
 
