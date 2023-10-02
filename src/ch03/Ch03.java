@@ -3,19 +3,22 @@ package ch03;
 import java.util.*;
 class Ch03 {
     public int[] solution(int[] arrival, int[] state){
-        Queue<Integer> enter =new LinkedList<>();
-        Queue<Integer> exit =new LinkedList<>();
-        int n= arrival.length, prev=1;
-        int [] answer= new int[n];
+
+        Queue<Integer> enter = new LinkedList<>();
+        Queue<Integer> exit = new LinkedList<>();
+        int n=arrival.length,prev=1;
+
+        int [] answer = new int[n];
 
         for(int t=0,i=0,cnt=0;;t++){
-            if(enter.isEmpty()&&exit.isEmpty()&&i<n){
+            if(enter.isEmpty() && exit.isEmpty() && i<n){
                 if(t<arrival[i]){
                     t=arrival[i];
                     prev=1;
                 }
             }
-            while(i < n && arrival[i] <=t){
+
+            while( i< n && arrival [i] <=t){
                 if(state[i]==0)
                     enter.offer(i);
                 else
@@ -25,13 +28,13 @@ class Ch03 {
 
             if(prev==1){
                 if(!exit.isEmpty()){
-                    answer[exit.poll()] =t;
+                    answer[exit.poll()]=t;
                     prev=1;
                 }else{
                     answer[enter.poll()]=t;
                     prev=0;
                 }
-            }else {
+            }else if(prev==0){
                 if(!enter.isEmpty()){
                     answer[enter.poll()]=t;
                     prev=0;
@@ -40,12 +43,11 @@ class Ch03 {
                     prev=1;
                 }
             }
-
             cnt++;
-
             if(cnt==n)
                 break;
         }
+
         return answer;
     }
 
