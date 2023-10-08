@@ -1,22 +1,25 @@
 package ch03;
 
+import java.util.Arrays;
 import java.util.HashSet;
 
 class Ch01 {
     public int solution(int[] nums){
-        int answer = Integer.MIN_VALUE;
+        int answer = 0;
 
-        HashSet<Integer> hs = new HashSet<>();
+        HashSet<Integer> hashSet = new HashSet<>();
+        int n= nums.length;
+        Arrays.sort(nums);
 
-        for(int x:nums){
-            hs.add(x);
+        for(int x: nums){
+            hashSet.add(x);
         }
 
-        for(int x: hs){
-            if(hs.contains(x-1))
+        for(int x:hashSet){
+            if(hashSet.contains(x-1))
                 continue;
             int cnt=0;
-            while(hs.contains(x)){
+            while(hashSet.contains(x)){
                 cnt++;
                 x++;
             }
