@@ -1,34 +1,32 @@
 package section02;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
+class S01 {
 
-public class S01 {
+    public ArrayList<Integer> solution(int [] arr){
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        arrayList.add(arr[0]);
 
-    public ArrayList<Integer> solution(int [] array){
-        ArrayList<Integer> answer =new ArrayList<>();
-
-        answer.add(array[0]);
-
-        for(int i=1;i<array.length;i++){
-            if(array[i]>array[i-1])
-                answer.add(array[i]);
+        for(int i=1;i<arr.length;i++){
+            if(arr[i-1]<arr[i])
+                arrayList.add(arr[i]);
         }
 
-        return answer;
+        return arrayList;
     }
 
     public static void main(String[] args){
         S01 T = new S01();
         Scanner kb = new Scanner(System.in);
-        int n= kb.nextInt();
-        int [] array = new int[n];
+
+        int n=kb.nextInt();
+        int [] arr = new int[n];
 
         for(int i=0;i<n;i++){
-            array[i]=kb.nextInt();
+            arr[i]=kb.nextInt();
         }
 
-        for(int x:T.solution(array)){
+        for(int x: T.solution(arr)){
             System.out.print(x+" ");
         }
     }
