@@ -8,27 +8,23 @@ import java.util.Scanner;
 class S07 {
 
     public String solution(String str1,String str2) {
-
-        String str="";
         Queue<Character> queue =new LinkedList<>();
 
+        for(Character x : str1.toCharArray()){
+            queue.offer(x);
+        }
+
         for(Character x : str2.toCharArray()){
-            for(Character y:str1.toCharArray()){
-                if(x==y) {
-                    queue.add(x);
-                    break;
-                }
+            if(queue.contains(x)){
+                if(x!=queue.poll())
+                    return "NO";
             }
         }
 
-        for(Character x:queue){
-            str+=x;
-        }
-
-        if(str.equals(str1))
-            return "YES";
-        else
+        if(!queue.isEmpty())
             return "NO";
+
+        return "YES";
     }
 
     public static void main(String[] args) {
