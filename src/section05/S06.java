@@ -5,7 +5,7 @@ import java.util.Queue;
 import java.util.Scanner;
 
 
-class Main {
+class S06 {
 
     public int solution(int n,int m) {
         Queue<Integer> queue =new LinkedList<>();
@@ -29,7 +29,7 @@ class Main {
     }
 
     public static void main(String[] args) {
-        Main T = new Main();
+        S06 T = new S06();
         Scanner kb = new Scanner(System.in);
 
         int n = kb.nextInt();
