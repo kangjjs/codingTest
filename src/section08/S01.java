@@ -1,47 +1,45 @@
 package section08;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
-public class S01 {
+class S01 {
 
-    static int n,sum=0;
+    static String answer="NO";
     static int [] arr;
-    static boolean flag=false;
+    static int n,ans;
+    boolean flag=false;
 
-    public void solution(int l,int s){
+    public void solution(int l,int sum,int [] arr) {
         if(flag)
             return;
-        if(s>sum/2)
+        if(sum>ans/2)
             return;
         if(l==n){
-            if(sum-s==s)
+            if(sum==(ans-sum)){
+                answer="YES";
                 flag=true;
-        }
-        else{
-            solution(l+1,s+arr[l]);
-            solution(l+1,s);
+            }
+        }else{
+            solution(l+1,sum+arr[l],arr);
+            solution(l+1,sum,arr);
         }
     }
+
 
     public static void main(String[] args) {
         S01 T = new S01();
         Scanner kb = new Scanner(System.in);
 
-        n =kb.nextInt();
+        n=kb.nextInt();
         arr=new int[n];
 
         for(int i=0;i<n;i++){
-            arr[i]= kb.nextInt();
-            sum+=arr[i];
+            arr[i] = kb.nextInt();
         }
 
-        Arrays.sort(arr);
-        T.solution(0,0);
-
-        if(flag)
-            System.out.print("YES");
-        else
-            System.out.print("NO");
+        ans = Arrays.stream(arr).sum();
+        T.solution(0,0,arr);
+        System.out.print(answer);
     }
 }
+
