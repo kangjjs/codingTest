@@ -1,7 +1,7 @@
 package section08;
 
 import java.util.*;
-class Main {
+class S07 {
 
     int [][] dy = new int[35][35];
 
@@ -15,7 +15,7 @@ class Main {
     }
 
     public static void main(String[] args) {
-        Main T = new Main();
+        S07 T = new S07();
         Scanner kb = new Scanner(System.in);
 
         int n = kb.nextInt();
