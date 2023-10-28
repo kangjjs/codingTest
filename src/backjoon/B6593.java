@@ -17,7 +17,7 @@ class Building {
     }
 }
 
-public class Main {
+public class B6593 {
 
     static int l, r, c;
     static char[][][] building;
@@ -49,7 +49,7 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-        Main T = new Main();
+        B6593 T = new B6593();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
