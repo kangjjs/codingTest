@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Main {
+public class B17142 {
 
     static int n, m, zeroCnt, answer = Integer.MAX_VALUE;
     static ArrayList<Point> virusList;
@@ -108,7 +108,7 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-        Main T = new Main();
+        B17142 T = new B17142();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
