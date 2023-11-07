@@ -34,7 +34,6 @@ public class B16234 {
                     }
                 }
             }
-
             if (!flag)
                 return cnt;
             cnt++;
