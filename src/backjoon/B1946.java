@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.StringTokenizer;
 
-public class Main {
+public class B1946 {
 
     static class Rate implements Comparable<Rate> {
         int x, y;
