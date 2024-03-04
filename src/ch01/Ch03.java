@@ -1,72 +1,63 @@
 package ch01;
 
 class Ch03 {
+
+    int[] dx = {-1, 0, 1, 0};
+    int[] dy = {0, 1, 0, -1};
+
     public int solution(int[][] board) {
         int answer = 0;
-        int n=board.length;
+        int dp = 0, dd = 0, n = board.length, px = 0, py = 0, dogX = 0, dogY = 0;
 
-        int[] px = {-1, 0, 1, 0};
-        int[] py = {0, 1, 0, -1};
-
-        int[] dx = {-1, 0, 1, 0};
-        int[] dy = {0, 1, 0, -1};
-
-        int dogX=0,dogY=0,peX=0,peY=0,dp=0,dd=0;
-
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                if(board[i][j]==2){
-                    peX=i;
-                    peY=j;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (board[i][j] == 2) {
+                    px = i;
+                    py = j;
                 }
-
-                if(board[i][j]==3){
-                    dogX=i;
-                    dogY=j;
+                if (board[i][j] == 3) {
+                    dogX = i;
+                    dogY = j;
                 }
             }
         }
 
-        while(answer<10000){
+        while (answer < 10000) {
             answer++;
+            int nx = px + dx[dp];
+            int ny = py + dy[dp];
+            int ddx = dogX + dx[dd];
+            int ddy = dogY + dy[dd];
+            boolean flag1 = true, flag2 = true;
 
-            boolean bp=true,bd=true;
-
-            int npeX=peX+px[dp];
-            int npeY=peY+py[dp];
-
-            int ndX=dogX+dx[dd];
-            int ndY=dogY+dy[dd];
-
-            if(npeX>=n||npeX<0||npeY>=n||npeY<0||board[npeX][npeY]==1){
-                dp=(dp+1)%4;
-                bp=false;
+            if (nx < 0 || nx >= n || ny < 0 || ny >= n || board[nx][ny] == 1) {
+                dp = (dp + 1) % 4;
+                flag1 = false;
             }
 
-            if(ndX>=n||ndX<0||ndY>=n||ndY<0||board[ndX][ndY]==1){
-                dd=(dd+1)%4;
-                bd=false;
+            if (ddx < 0 || ddx >= n || ddy < 0 || ddy >= n || board[ddx][ddy] == 1) {
+                dd = (dd + 1) % 4;
+                flag2 = false;
             }
 
-            if(bp){
-                peX=npeX;
-                peY=npeY;
+            if (flag1) {
+                px = nx;
+                py = ny;
             }
 
-            if(bd){
-                dogX=ndX;
-                dogY=ndY;
+            if (flag2) {
+                dogX = ddx;
+                dogY = ddy;
             }
 
-            if(peX==dogX&&peY==dogY)
+            if (px==dogX && py==dogY)
                 break;
         }
 
-        if(answer>=10000){
+        if (answer >= 10000)
             return 0;
-        }else{
+        else
             return answer;
-        }
     }
 
     public static void main(String[] args) {
