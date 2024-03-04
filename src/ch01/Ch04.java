@@ -1,41 +1,34 @@
 package ch01;
 
-import java.util.Arrays;
+import java.util.*;
 
-public class Ch04 {
+class Ch04 {
     public int[] solution(int c, int r, int k) {
         int[] answer = new int[2];
-
-        if (k > c * r)
+        int[][] seats = new int[r][c];
+        if (k > r * c)
             return new int[]{0, 0};
+        int[] dx = {1, 0, -1, 0};
+        int[] dy = {0, 1, 0, -1};
+        int d = 0, cnt = 1, x = 0, y = 0;
 
-        int[] dx = {0, 1, 0, -1};
-        int[] dy = {1, 0, -1, 0};
+        while (cnt < k) {
 
-        int[][] board = new int[c][r];
+            int nx = x + dx[d];
+            int ny = y + dy[d];
 
-        int x = 0, y = 0, count = 1, i = 0;
-
-        while (count < k) {
-
-            int nx = x + dx[i];
-            int ny = y + dy[i];
-
-            if (nx < 0 || nx >= c || ny < 0 || ny >= r || board[nx][ny] > 0) {
-                i = (i + 1) % 4;
+            if (nx < 0 || nx >= r || ny < 0 || ny >= c || seats[nx][ny] > 0) {
+                d = (d + 1) % 4;
                 continue;
             }
 
-            board[x][y] = count;
-            count++;
+            seats[x][y] = cnt++;
             x = nx;
             y = ny;
-
         }
 
-        answer[0] = x + 1;
-        answer[1] = y + 1;
-
+        answer[0] = y + 1;
+        answer[1] = x + 1;
         return answer;
     }
 
