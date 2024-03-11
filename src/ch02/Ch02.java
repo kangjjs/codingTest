@@ -1,29 +1,30 @@
 package ch02;
 
 import java.util.*;
+
 class Ch02 {
-    public int[] solution(String s){
+    public int[] solution(String s) {
         int[] answer = new int[5];
+        int max = 0;
+        HashMap<Character, Integer> hm = new HashMap<>();
 
-        int [] str =new int[5];
-        int max=0;
-
-        for(char x:s.toCharArray()){
-            str[x-97]++;
+        for (char x : s.toCharArray()) {
+            hm.put(x, hm.getOrDefault(x, 0) + 1);
         }
 
-        for(int x:str){
-            max=Math.max(x,max);
+        for (char x : hm.keySet()) {
+            answer[(int) x - 97] = hm.get(x);
+            max = Math.max(max,hm.get(x));
         }
 
-        for(int i=0;i<5;i++){
-            answer[i]=max-str[i];
+        for (int i = 0; i < 5; i++) {
+            answer[i]=max-answer[i];
         }
 
         return answer;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Ch02 T = new Ch02();
         System.out.println(Arrays.toString(T.solution("aaabc")));
         System.out.println(Arrays.toString(T.solution("aabb")));
@@ -32,4 +33,3 @@ class Ch02 {
         System.out.println(Arrays.toString(T.solution("abbccddee")));
     }
 }
-
