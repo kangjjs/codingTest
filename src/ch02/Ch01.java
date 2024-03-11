@@ -4,12 +4,10 @@ import java.util.HashMap;
 
 class Ch01 {
     public int solution(String s){
-        int answer = 0;
-
-        HashMap<Character,Integer> hm =new HashMap<>();
-
-        for(char x:s.toCharArray()){
-            hm.put(x,hm.getOrDefault(x,0)+1);
+        int answer = -1;
+        HashMap<Character,Integer> hm = new HashMap<>();
+        for(char c:s.toCharArray()){
+            hm.put(c,hm.getOrDefault(c,0)+1);
         }
 
         for(int i=0;i<s.length();i++){
@@ -17,7 +15,7 @@ class Ch01 {
                 return i+1;
         }
 
-        return -1;
+        return answer;
     }
 
     public static void main(String[] args){
