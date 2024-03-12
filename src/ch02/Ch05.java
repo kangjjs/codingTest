@@ -1,46 +1,46 @@
 package ch02;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 
 class Ch05 {
     public String solution(String[] votes, int k) {
         String answer = " ";
-
-        HashMap<String, HashSet<String>> hm = new HashMap<>();
+        HashMap<String, HashSet<String>> voteHash = new HashMap<>();
         HashMap<String, Integer> candidate = new HashMap<>();
         HashMap<String, Integer> present = new HashMap<>();
 
         for (String vote : votes) {
-            String a = vote.split(" ")[0];
-            String b = vote.split(" ")[1];
-
-            hm.putIfAbsent(a, new HashSet<String>());
-            hm.get(a).add(b);
-            candidate.put(b, candidate.getOrDefault(b, 0) + 1);
+            String x = vote.split(" ")[0];
+            String y = vote.split(" ")[1];
+            voteHash.putIfAbsent(x, new HashSet<String>());
+            voteHash.get(x).add(y);
+            candidate.put(y, candidate.getOrDefault(y, 0) + 1);
         }
 
         int max = Integer.MIN_VALUE;
 
-        for (String a : hm.keySet()) {
+        for (String x : voteHash.keySet()) {
             int cnt = 0;
-
-            for (String b : hm.get(a)) {
-                if (candidate.get(b) >= k)
+            for (String y : voteHash.get(x)) {
+                if (candidate.get(y) >= k)
                     cnt++;
             }
-            present.put(a, cnt);
+            present.put(x, cnt);
             max = Math.max(max, cnt);
         }
+        ArrayList<String> tmp = new ArrayList<>();
 
-        ArrayList<String> tmp =new ArrayList<>();
-        for(String name : present.keySet()){
-            if(present.get(name)==max)
-                tmp.add(name);
+        for(String x : present.keySet()){
+            if(present.get(x)==max){
+                tmp.add(x);
+            }
         }
 
-        tmp.sort(String::compareTo);
-        answer=tmp.get(0);
-
+        Collections.sort(tmp);
+        answer = tmp.get(0);
         return answer;
     }
 
