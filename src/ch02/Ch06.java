@@ -1,58 +1,59 @@
 package ch02;
 
-import java.time.LocalTime;
 import java.util.*;
 
-class Times implements Comparable<Times>{
-
-    public String name;
-    public int t;
-
-    public Times(String name, int t){
-        this.name=name;
-        this.t=t;
-    }
-
-    @Override
-    public int compareTo(Times o) {
-        return this.t-o.t;
-    }
-}
 class Ch06 {
 
-    public int getTime(String time){
+    public int time(String time) {
         int h = Integer.parseInt(time.split(":")[0]);
         int m = Integer.parseInt(time.split(":")[1]);
 
-        return h*60+m;
+        return h * 60 + m;
     }
 
-    public String[] solution(String[] reports, String times){
-        ArrayList<Times> time = new ArrayList<>();
-        ArrayList<String> answer = new ArrayList<>();
+    public static class People implements Comparable<People> {
+        public String name;
+        public int time;
 
-        for(String x: reports){
-            String a = x.split(" ")[0];
-            String b = x.split(" ")[1];
-            int t = getTime(b);
-
-            time.add(new Times(a,t));
+        public People(String name, int time) {
+            this.name = name;
+            this.time = time;
         }
 
-        Collections.sort(time);
+        @Override
+        public int compareTo(People o) {
+            return this.time - o.time;
+        }
+    }
 
-        int st = getTime(times.split(" ")[0]);
-        int et = getTime(times.split(" ")[1]);
+    public String[] solution(String[] reports, String times) {
+        ArrayList<People> peoples = new ArrayList<>();
 
-        for(Times t : time){
-            if(t.t >= st && t.t<=et)
-                answer.add(t.name);
+        for (String x : reports) {
+            String name = x.split(" ")[0];
+            int time = time(x.split(" ")[1]);
+            peoples.add(new People(name, time));
+        }
+
+        Collections.sort(peoples);
+
+        int st = time(times.split(" ")[0]);
+        int et = time(times.split(" ")[1]);
+        ArrayList<String> answer = new ArrayList<>();
+
+        for (People p : peoples) {
+            if (st <= p.time && p.time <= et) {
+                answer.add(p.name);
+            }
+
+            if (p.time > et)
+                break;
         }
 
         return answer.toArray(new String[0]);
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Ch06 T = new Ch06();
         System.out.println(Arrays.toString(T.solution(new String[]{"john 15:23", "daniel 09:30", "tom 07:23", "park 09:59", "luis 08:57"}, "08:33 09:45")));
         System.out.println(Arrays.toString(T.solution(new String[]{"ami 12:56", "daniel 15:00", "bob 19:59", "luis 08:57", "bill 17:35", "tom 07:23", "john 15:23", "park 09:59"}, "15:01 19:59")));
