@@ -3,49 +3,45 @@ package ch03;
 import java.util.Stack;
 
 class Ch02 {
-    public String solution(String s){
-        String answer = "";
+    public String solution(String s) {
+        StringBuilder answer = new StringBuilder();
+        Stack<String> stack = new Stack<>();
+        char[] chars = s.toCharArray();
 
-        Stack<String> st =new Stack<>();
-
-        for(Character x:s.toCharArray()) {
-            if(x==')'){
-                String tmp="";
-                while(!st.empty()){
-                    String c= st.pop();
-                    if(c.equals("(")){
-                        String res="";
-                        String num="";
-
-                        while(!st.empty()&&Character.isDigit(st.peek().charAt(0))){
-                            num+=st.pop();
+        for (char x : chars) {
+            if (x == ')') {
+                String str = "";
+                while (!stack.isEmpty()) {
+                    String c = stack.pop();
+                    if (c.equals("(")) {
+                        String num = "";
+                        while (!stack.isEmpty() && Character.isDigit(stack.peek().charAt(0))) {
+                            num += stack.pop();
                         }
-
-                        int cnt=0;
-                        if(num.equals(""))
-                            cnt=1;
+                        String res = "";
+                        int cnt;
+                        if (num.equals(""))
+                            cnt = 1;
                         else
-                            cnt=Integer.parseInt(num);
-                        for(int i=0;i<cnt;i++){
-                            res+=tmp;
-                        }
-                        st.push(res);
+                            cnt = Integer.parseInt(num);
+                        for (int i = 0; i < cnt; i++)
+                            res += str;
+                        stack.push(res);
                         break;
                     }
-                    tmp = c+ tmp;
+                    str = c+ str;
                 }
-            }else
-                st.push(String.valueOf(x));
+            } else {
+                stack.push(String.valueOf(x));
+            }
         }
 
-        for(String x:st){
-            answer+=x;
-        }
-
-        return answer;
+        for(String x:stack)
+            answer.append(x);
+        return answer.toString();
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Ch02 T = new Ch02();
         System.out.println(T.solution("3(a2(b))ef"));
         System.out.println(T.solution("2(ab)k3(bc)"));
