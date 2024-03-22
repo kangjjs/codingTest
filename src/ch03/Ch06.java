@@ -1,6 +1,9 @@
 package ch03;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.TreeSet;
 
 class Ch06 {
     public int solution(int n, int[][] meetings) {
@@ -8,29 +11,30 @@ class Ch06 {
         int[] res = new int[n];
         PriorityQueue<int[]> ends = new PriorityQueue<>((a, b) -> a[0] == b[0] ? a[1] - b[1] : a[0] - b[0]);
         TreeSet<Integer> rooms = new TreeSet<>();
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < n; i++) {
             rooms.add(i);
+        }
+
         Arrays.sort(meetings, Comparator.comparingInt(a -> a[0]));
 
-        for (int[] m : meetings) {
-            while (!ends.isEmpty() && ends.peek()[0] <= m[0])
+        for(int[] m : meetings){
+            while(!ends.isEmpty() && ends.peek()[0] <= m[0])
                 rooms.add(ends.poll()[1]);
-            if (!rooms.isEmpty()) {
+            if(!rooms.isEmpty()){
                 int room = rooms.pollFirst();
                 res[room]++;
-                ends.add(new int[]{m[1], room});
-            } else {
+                ends.add(new int[]{m[1],room});
+            }else{
                 int[] e = ends.poll();
                 res[e[1]]++;
-                ends.add(new int[]{e[0] + (m[1] - m[0]), e[1]});
+                ends.add(new int[]{e[0]+(m[1]-m[0]),e[1]});
             }
         }
 
-        int max = 0;
-
-        for (int i = 0; i < n; i++) {
-            if (res[i] > max) {
-                max = res[i];
+        int maxi = 0;
+        for(int i = 0; i < n; i++){
+            if(res[i] > maxi){
+                maxi = res[i];
                 answer = i;
             }
         }
