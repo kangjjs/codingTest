@@ -2,7 +2,7 @@ package programmers;
 
 import java.util.*;
 
-class Solution {
+class KakaoGift {
     public int solution(String[] friends, String[] gifts) {
         int answer = 0;
         HashMap<String, Integer> hm = new HashMap<>();
