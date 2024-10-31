@@ -7,53 +7,49 @@ import java.util.StringTokenizer;
 
 public class B1987 {
 
-    static int n, m, answer = Integer.MIN_VALUE;
-    static int [][] board;
-    static boolean[] visit = new boolean[26];
+    static int[] dx = {1, 0, -1, 0};
+    static int[] dy = {0, 1, 0, -1};
+    static int r, c;
+    static char[][] map;
+    static boolean[] visited;
+    static int ans;
 
-    int[] dx = {1, 0, -1, 0};
-    int[] dy = {0, 1, 0, -1};
+    static void dfs(int l, int x, int y) {
+        ans = Math.max(l, ans); // 최대 칸 수 갱신
 
+        for (int i = 0; i < 4; i++) {
+            int nx = x + dx[i];
+            int ny = y + dy[i];
 
-    public void solution(int l, int x, int y) {
-        if (visit[board[x][y]]) {
-            answer = Math.max(answer,l);
-            return;
-        } else {
-            visit[board[x][y]]=true;
-            for (int i = 0; i < 4; i++) {
-                int nx = x + dx[i];
-                int ny = y + dy[i];
-
-                if (nx >= 0 && nx < n && ny >= 0 && ny < m) {
-                    solution(l + 1, nx, ny);
-                }
+            if (nx < 0 || nx >= r || ny < 0 || ny >= c) {
+                continue;
             }
-            visit[board[x][y]]=false;
-        }
 
+            if (!visited[map[nx][ny] - 'A']) {
+                visited[map[nx][ny] - 'A'] = true;
+                dfs(l + 1, nx, ny);
+                visited[map[nx][ny] - 'A'] = false;
+            }
+        }
     }
 
-
     public static void main(String[] args) throws IOException {
-        B1987 T = new B1987();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-
-        n = Integer.parseInt(st.nextToken());
-        m = Integer.parseInt(st.nextToken());
-
-        board = new int[n][m];
-
-        for (int i = 0; i < n; i++) {
+        r = Integer.parseInt(st.nextToken());
+        c = Integer.parseInt(st.nextToken());
+        map = new char[r][c];
+        ans = 0;
+        for (int i = 0; i < r; i++) {
             String str = br.readLine();
-            for (int j = 0; j < m; j++) {
-                board[i][j] = str.charAt(j)-'A';
+            for (int j = 0; j < c; j++) {
+                map[i][j] = str.charAt(j);
             }
         }
+        visited = new boolean[26];
+        visited[map[0][0] - 'A'] = true;
+        dfs(1,0,0);
 
-        T.solution(0, 0, 0);
-
-        System.out.print(answer);
+        System.out.println(ans);
     }
 }
