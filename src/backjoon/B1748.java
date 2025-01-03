@@ -20,7 +20,6 @@ public class B1748 {
             }
             ans += cnt;
         }
-
         System.out.print(ans);
     }
 }
