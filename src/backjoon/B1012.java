@@ -71,6 +71,7 @@ public class B1012 {
                 if (nx >= 0 && nx < n && ny >= 0 && ny < m && map[nx][ny] == 1 && !visited[nx][ny]) {
                     visited[nx][ny] = true;
                     q.add(new int[]{nx, ny});
+
                 }
             }
         }
