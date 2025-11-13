@@ -55,7 +55,6 @@ public class B5766 {
             sb.append('\n');
         }
 
-
         System.out.print(sb);
     }
 }
